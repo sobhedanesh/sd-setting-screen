@@ -2,397 +2,405 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تنظیمات</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>صبح دانش</title>
     
     <!-- فونت لاله‌زار -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap">
     
-    <!-- آیکون‌های Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <style>
-        /* اسکرول‌بار سبز نئونی */
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #000000;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #00ff00;
-            border-radius: 6px;
-            box-shadow: 0 0 10px #00ff00;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00cc00;
-            box-shadow: 0 0 20px #00ff00;
-        }
+    <!-- آیکون‌های Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-        /* برای فایرفاکس */
-        html {
-            scrollbar-color: #00ff00 #000000;
-            scrollbar-width: thin;
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            color: #00ff00;
             font-family: 'Lalezar', cursive;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(to bottom, #000000, #1f8b1f);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-        .container {
-            width: 100%;
-            max-width: 375px;
+            color: white;
+            direction: rtl;
+            text-align: right;
+            max-width: 480px;
+            margin: 0 auto;
             padding: 20px;
-            box-sizing: border-box;
-            position: relative;
-        }
-        .neon-glow {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            background: linear-gradient(to top, #00ff00, transparent);
-            filter: blur(30px);
-            opacity: 0.7;
-            z-index: -1;
-        }
-        h1 {
-            color: #00ff00;
-            text-align: center;
-            text-shadow: 0 0 15px #00ff00;
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-        .settings-icon {
-            font-size: 40px;
-            color: #00ff00;
-            text-shadow: 0 0 15px #00ff00;
-            margin-bottom: 10px;
-        }
-
-        /* کارت کاربر */
-        .user-card {
-            background: linear-gradient(135deg, #001a00, #002600);
-            border: 2px solid #00ff00;
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            margin: 30px 0;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
-        }
-        .user-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid #00ff00;
-            box-shadow: 0 0 20px #00ff00;
-            object-fit: cover;
-            margin-bottom: 15px;
-        }
-        .user-name {
-            font-size: 26px;
-            color: #00ff99;
-            margin: 10px 0;
-        }
-        .not-registered {
-            font-size: 20px;
-            color: #00ff99;
-        }
-
-        /* دکمه‌های آکاردئون */
-        .accordion-header {
-            background-color: #001a00;
-            border: 2px solid #00ff00;
-            border-radius: 16px;
-            padding: 16px 20px;
-            margin-bottom: 15px;
-            cursor: pointer;
-            font-size: 24px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-            transition: all 0.3s;
-            min-height: 100px;
-        }
-        .accordion-header:hover {
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
-            background-color: #002600;
-        }
-        .header-icon {
-            font-size: 30px;
-            margin-bottom: 8px;
-            color: #00ff00;
-        }
-        .header-text {
-            font-size: 22px;
         }
 
-        .accordion-content {
-            display: none;
-            background-color: #001a00;
-            border: 1px solid #00ff41;
-            border-radius: 16px;
-            padding: 20px;
-            margin-top: -10px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
-        }
-        .accordion-content.active {
-            display: block;
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            width: 100%;
         }
 
-        /* هر سوال در سوالات متداول داخل کادر جداگانه */
-        .faq-item {
-            background-color: #001a00;
-            border: 2px solid #00ff00;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 0 12px rgba(0, 255, 0, 0.4);
-            font-size: 18px;
-            color: #00ff99;
-            line-height: 1.6;
-        }
-        .faq-item:last-child {
-            margin-bottom: 0;
-        }
-
-        /* پشتیبانی */
-        .support-text {
+        h2 {
             text-align: center;
-            font-size: 20px;
-            color: #00ff99;
-            line-height: 1.8;
-        }
-        .phone-link {
-            color: #00ff00;
-            text-decoration: none;
+            margin-bottom: 25px;
             font-size: 28px;
-            display: block;
-            margin: 15px 0;
-            text-shadow: 0 0 15px #00ff00;
-        }
-        .phone-link:hover {
-            color: #00ff99;
         }
 
-        /* فرم ثبت نام */
-        label {
+        .upload-label {
             display: block;
-            margin: 15px 0 8px;
-            color: #00ff41;
+            text-align: center;
+            margin: 15px 0 25px;
             font-size: 18px;
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            background-color: #000000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
-            font-family: 'Lalezar', cursive;
-            font-size: 18px;
-            box-sizing: border-box;
+            color: rgba(255, 255, 255, 0.8);
         }
 
-        .file-upload-wrapper {
-            position: relative;
-            display: block;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        .file-upload-btn {
-            display: block;
+        input[type="text"],
+        input[type="email"],
+        input[type="file"] {
             width: 100%;
             padding: 15px;
-            background-color: #002600;
-            color: #00ff00;
-            border: 2px dashed #00ff00;
-            border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 18px;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
-            transition: all 0.3s;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-family: 'Lalezar', cursive;
+            font-size: 20px;
         }
-        .file-upload-btn:hover {
-            background-color: #003300;
-            box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
-        }
-        input[type="file"] {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
         }
 
         button {
             width: 100%;
             padding: 15px;
-            background-color: #002600;
-            color: #00ff00;
-            border: 2px solid #00ff00;
-            border-radius: 12px;
-            font-family: 'Lalezar', cursive;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
             margin-top: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Lalezar', cursive;
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.3s;
         }
+
         button:hover {
-            background-color: #003300;
-            box-shadow: 0 0 30px #00ff00;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .main-page {
+            display: none;
+            width: 100%;
+        }
+
+        .top-rect {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .profile-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .default-profile {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .username {
+            font-size: 26px;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* دکمه‌های اصلی */
+        .option-btn {
+            display: flex;
+            align-items: center;
+            padding: 16px 18px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* آیکون شیشه‌ای کوچکتر */
+        .glass-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+
+        .option-text {
+            font-size: 23px;
+            flex-grow: 1;
+            text-align: right;
+        }
+
+        .content-text {
+            font-size: 19px;
+            line-height: 2.2;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            word-wrap: break-word; /* برای شکستن ایمیل طولانی در موبایل */
+            overflow-wrap: break-word;
+        }
+
+        .content-box strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 21px;
+        }
+
+        /* مخصوص ایمیل طولانی در پشتیبانی */
+        .email-text {
+            font-size: 20px;
+            direction: ltr;
+            text-align: center;
+            unicode-bidi: embed;
         }
     </style>
 </head>
 <body>
-    <div class="neon-glow"></div>
-    <div class="container">
-        <div style="text-align: center;">
-            <i class="fas fa-cog settings-icon"></i>
-            <h1>تنظیمات</h1>
+
+    <!-- فرم ثبت نام / ویرایش -->
+    <div id="registerForm" class="glass">
+        <h2>خوش آمدی!</h2>
+        <p style="text-align:center; margin-bottom:20px; font-size:18px;">لطفاً اطلاعات خود را وارد کن</p>
+
+        <input type="text" id="userName" placeholder="نام و نام خانوادگی" required>
+        <input type="email" id="userEmail" placeholder="ایمیل (اختیاری)">
+        
+        <label class="upload-label">این قسمت آپلود عکس پروفایل است</label>
+        <input type="file" id="userPhoto" accept="image/*">
+
+        <button onclick="saveProfile()">ثبت و ورود</button>
+    </div>
+
+    <!-- صفحه اصلی -->
+    <div id="mainPage" class="main-page">
+
+        <div class="glass top-rect" id="profileSection">
+            <div class="default-profile" id="defaultIcon">
+                <span class="material-icons">person</span>
+            </div>
+            <img id="profileImage" class="profile-img" style="display:none;">
+            <div class="username" id="displayName">کاربر</div>
         </div>
 
-        <!-- کارت کاربر -->
-        <div class="user-card">
-            <img id="avatar-preview" src="https://via.placeholder.com/100?text=👤" alt="پروفایل" class="user-avatar">
-            <div id="user-name-display" class="user-name">هنوز ثبت نام نکردی 😔</div>
-            <div class="not-registered">تو قسمت پروفایل ثبت نام کن 🚀</div>
-        </div>
-
-        <!-- پروفایل -->
-        <div class="accordion-header" onclick="toggleAccordion('profile')">
-            <i class="fas fa-user header-icon"></i>
-            <div class="header-text">پروفایل</div>
-        </div>
-        <div id="profile" class="accordion-content">
-            <h2 style="text-align:center; color:#00ff41;">ثبت نام</h2>
-            <form id="register-form">
-                <label for="username">نام کاربری ✨</label>
-                <input type="text" id="username" name="username" placeholder="نام خود را وارد کن">
-
-                <label for="password">رمز عبور 🔒</label>
-                <input type="password" id="password" name="password" placeholder="رمز امن انتخاب کن">
-
-                <label>عکس پروفایل 📸</label>
-                <div class="file-upload-wrapper">
-                    <div class="file-upload-btn">
-                        <i class="fas fa-cloud-upload-alt"></i> انتخاب عکس
-                    </div>
-                    <input type="file" id="profile-pic" accept="image/*">
+        <div class="glass options-container">
+            <div class="option-btn" onclick="openEdit()">
+                <div class="glass-icon">
+                    <span class="material-icons">edit</span>
                 </div>
+                <div class="option-text">ویرایش پروفایل</div>
+            </div>
 
-                <button type="button" onclick="saveProfile()">ثبت نام کن 💚</button>
-            </form>
-        </div>
+            <div class="option-btn" onclick="showAbout()">
+                <div class="glass-icon">
+                    <span class="material-icons">info</span>
+                </div>
+                <div class="option-text">درباره برنامه</div>
+            </div>
 
-        <!-- سوالات متداول -->
-        <div class="accordion-header" onclick="toggleAccordion('faq')">
-            <i class="fas fa-question-circle header-icon"></i>
-            <div class="header-text">سوالات متداول</div>
-        </div>
-        <div id="faq" class="accordion-content">
-            <div class="faq-item">آیا صبح دانش رایگان است؟ ✅ بله، کاملاً رایگان و بدون محدودیت!</div>
-            <div class="faq-item">این هوش مصنوعی چیه؟ 🤖 یک دستیار هوشمند برای مدرسه صبح دانش</div>
-            <div class="faq-item">چطور استفاده کنم؟ 💬 فقط سوال بپرس و جواب بگیر!</div>
-            <div class="faq-item">اطلاعاتم امن می‌مونه؟ 🔐 بله، حریم خصوصی خیلی مهمه برامون</div>
-            <div class="faq-item">روی موبایل کار می‌کنه؟ 📱 کاملاً بهینه‌شده برای موبایل</div>
-        </div>
+            <div class="option-btn" onclick="showFAQ()">
+                <div class="glass-icon">
+                    <span class="material-icons">help_outline</span>
+                </div>
+                <div class="option-text">سوالات متداول</div>
+            </div>
 
-        <!-- درباره ما -->
-        <div class="accordion-header" onclick="toggleAccordion('about')">
-            <i class="fas fa-info-circle header-icon"></i>
-            <div class="header-text">درباره ما</div>
-        </div>
-        <div id="about" class="accordion-content">
-            <p>
-                صبح دانش یک هوش مصنوعی فوق‌العاده است که توسط یکی از دانش‌آموزان بااستعداد مدرسه صبح دانش ساخته شده 🌟 
-                این مدرسه یکی از بهترین مدارس تهرانه که روی خلاقیت و فناوری تمرکز داره 🚀 
-                هدف ما کمک به همه دانش‌آموزان و علاقه‌مندان به یادگیریه 📚 
-                این پروژه نشون می‌ده که دانش‌آموزان ایرانی چقدر توانایی دارن 💪 
-                مدرسه صبح دانش سابقه درخشانی تو المپیادها و مسابقات علمی داره 🏆 
-                این هوش مصنوعی کاملاً رایگانه و برای همه در دسترسه 🌍 
-                امیدواریم صبح دانش بتونه الهام‌بخش نسل جوان باشه ✨ 
-                برای اطلاعات بیشتر با مدرسه تماس بگیر 📞
-            </p>
-        </div>
-
-        <!-- پشتیبانی - شماره اصلاح شد -->
-        <div class="accordion-header" onclick="toggleAccordion('support')">
-            <i class="fas fa-headset header-icon"></i>
-            <div class="header-text">پشتیبانی</div>
-        </div>
-        <div id="support" class="accordion-content">
-            <div class="support-text">
-                اگر سوالی داری یا پیشنهادی داری 📞<br>
-                به این شماره زنگ بزن یا پیام بده:<br>
-                <a href="tel:+989039304464" class="phone-link">+989039304464</a>
-                <br>ما همیشه آماده کمک به شما هستیم 💚
+            <div class="option-btn" onclick="showSupport()">
+                <div class="glass-icon">
+                    <span class="material-icons">support_agent</span>
+                </div>
+                <div class="option-text">پشتیبانی</div>
             </div>
         </div>
     </div>
 
+    <!-- صفحات محتوا -->
+    <div id="contentPage" class="glass main-page" style="display:none;">
+        <h2 id="contentTitle" style="text-align:center; margin-bottom:20px;"></h2>
+        <div id="contentText" class="content-text"></div>
+        <button onclick="backToMain()" style="margin-top:30px;">برگشت</button>
+    </div>
+
     <script>
-        function toggleAccordion(id) {
-            const content = document.getElementById(id);
-            content.classList.toggle('active');
-        }
-
-        // پیش‌نمایش عکس
-        document.getElementById('profile-pic').addEventListener('change', function(e) {
-            if (e.target.files && e.target.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    document.getElementById('avatar-preview').src = ev.target.result;
-                }
-                reader.readAsDataURL(e.target.files[0]);
-            }
-        });
-
-        // ذخیره پروفایل
-        function saveProfile() {
-            const username = document.getElementById('username').value.trim();
-            const avatar = document.getElementById('avatar-preview').src;
-
-            if (username) {
-                document.getElementById('user-name-display').textContent = username + " 🌟";
-                document.querySelector('.not-registered').style.display = 'none';
-                localStorage.setItem('userName', username);
-                localStorage.setItem('userAvatar', avatar);
-                alert('ثبت نام با موفقیت انجام شد! 💚');
-            } else {
-                alert('لطفاً نام کاربری وارد کن 😊');
-            }
-        }
-
-        // بارگذاری اطلاعات ذخیره‌شده
         window.onload = function() {
             const savedName = localStorage.getItem('userName');
-            const savedAvatar = localStorage.getItem('userAvatar');
+            const savedPhoto = localStorage.getItem('userPhoto');
 
             if (savedName) {
-                document.getElementById('user-name-display').textContent = savedName + " 🌟";
-                document.querySelector('.not-registered').style.display = 'none';
+                document.getElementById('displayName').textContent = savedName;
+                if (savedPhoto) {
+                    document.getElementById('profileImage').src = savedPhoto;
+                    document.getElementById('profileImage').style.display = 'block';
+                    document.getElementById('defaultIcon').style.display = 'none';
+                }
+                document.getElementById('registerForm').style.display = 'none';
+                document.getElementById('mainPage').style.display = 'block';
             }
-            if (savedAvatar && savedAvatar !== "https://via.placeholder.com/100?text=👤") {
-                document.getElementById('avatar-preview').src = savedAvatar;
+        };
+
+        function saveProfile() {
+            const name = document.getElementById('userName').value.trim();
+            if (!name) {
+                alert('لطفاً نام خود را وارد کنید!');
+                return;
             }
+
+            localStorage.setItem('userName', name);
+            document.getElementById('displayName').textContent = name;
+
+            const photoInput = document.getElementById('userPhoto');
+            if (photoInput.files && photoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem('userPhoto', e.target.result);
+                    document.getElementById('profileImage').src = e.target.result;
+                    document.getElementById('profileImage').style.display = 'block';
+                    document.getElementById('defaultIcon').style.display = 'none';
+                };
+                reader.readAsDataURL(photoInput.files[0]);
+            } else if (!localStorage.getItem('userPhoto')) {
+                document.getElementById('defaultIcon').style.display = 'flex';
+            }
+
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'block';
+        }
+
+        function openEdit() {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            document.getElementById('userName').value = localStorage.getItem('userName') || '';
+        }
+
+        function showAbout() {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('contentPage').style.display = 'block';
+            document.getElementById('contentTitle').textContent = 'درباره برنامه';
+            document.getElementById('contentText').innerHTML = `
+                <div class="content-box">
+                    صبح دانش یک هوش مصنوعی پیشرفته و هوشمند است<br>
+                    که توسط دانش‌آموزان و معلمان مدرسه صبح دانش تهران ساخته شده.<br><br>
+                    
+                    هدف ما از ساخت این هوش مصنوعی، کمک به یادگیری بهتر<br>
+                    و آسان‌تر دانش‌آموزان در سراسر ایران است.<br><br>
+                    
+                    صبح دانش می‌تواند به سوالات درسی شما پاسخ دهد،<br>
+                    مسائل ریاضی را حل کند، متن‌های ادبی را توضیح دهد<br>
+                    و حتی در پروژه‌های تحقیقاتی کنار شما باشد.<br><br>
+                    
+                    این برنامه کاملاً رایگان است و هیچ هزینه‌ای ندارد.<br>
+                    ما معتقدیم آموزش باکیفیت باید برای همه در دسترس باشد.<br><br>
+                    
+                    تیم توسعه‌دهنده ما همیشه در حال بهبود و افزودن قابلیت‌های جدید است<br>
+                    تا تجربه بهتری برای شما فراهم کنیم.<br><br>
+                    
+                    از اینکه صبح دانش را انتخاب کردید، سپاسگزاریم!
+                </div>
+            `;
+        }
+
+        function showFAQ() {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('contentPage').style.display = 'block';
+            document.getElementById('contentTitle').textContent = 'سوالات متداول';
+            document.getElementById('contentText').innerHTML = `
+                <div class="content-box">
+                    <strong>۱. آیا استفاده از صبح دانش هزینه دارد؟</strong> خیر! صبح دانش کاملاً رایگان است و همیشه خواهد بود.
+                </div>
+                
+                <div class="content-box">
+                    <strong>۲. آیا نیاز به ثبت نام دارد؟</strong> فقط یک بار برای شخصی‌سازی پروفایل ثبت نام می‌کنید، اما بدون آن هم می‌توانید استفاده کنید.
+                </div>
+                
+                <div class="content-box">
+                    <strong>۳. آیا اطلاعات من امن است؟</strong> بله، اطلاعات شما فقط روی دستگاه خودتان ذخیره می‌شود و به هیچ سروری ارسال نمی‌شود.
+                </div>
+                
+                <div class="content-box">
+                    <strong>۴. صبح دانش چه موضوعاتی را پشتیبانی می‌کند؟</strong> همه دروس مدرسه، ریاضی، فیزیک، شیمی، ادبیات، زبان انگلیسی و خیلی موضوعات دیگر.
+                </div>
+            `;
+        }
+
+        function showSupport() {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('contentPage').style.display = 'block';
+            document.getElementById('contentTitle').textContent = 'پشتیبانی';
+            document.getElementById('contentText').innerHTML = `
+                <div class="content-box">
+                    اگر سوال، پیشنهاد یا مشکلی دارید، با ما در ارتباط باشید:
+                </div>
+                
+                <div class="content-box">
+                    <strong>ایمیل:</strong><br>
+                    <span class="email-text">arshammajidi168@gmail.com</span>
+                </div>
+                
+                <div class="content-box">
+                    <strong>تلفن:</strong><br>
+                    ۰۹۰۳۹۳۰۴۴۶۴
+                </div>
+                
+                <div class="content-box">
+                    معمولاً در کمتر از ۲۴ ساعت به پیام‌های شما پاسخ می‌دهیم.
+                </div>
+            `;
+        }
+
+        function backToMain() {
+            document.getElementById('contentPage').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'block';
         }
     </script>
+
 </body>
 </html>
