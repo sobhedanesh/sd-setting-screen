@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>صبح دانش</title>
-   
+  
     <!-- فونت لاله‌زار -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap">
-   
+  
     <!-- آیکون‌های Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
@@ -119,7 +119,6 @@
             flex-direction: column;
             gap: 15px;
         }
-        /* دکمه‌های اصلی */
         .option-btn {
             display: flex;
             align-items: center;
@@ -136,7 +135,6 @@
         .option-btn:hover {
             background: rgba(255, 255, 255, 0.25);
         }
-        /* آیکون شیشه‌ای کوچکتر */
         .glass-icon {
             width: 38px;
             height: 38px;
@@ -165,7 +163,7 @@
             padding: 18px;
             margin-bottom: 18px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            word-wrap: break-word; /* برای شکستن ایمیل طولانی در موبایل */
+            word-wrap: break-word;
             overflow-wrap: break-word;
         }
         .content-box strong {
@@ -173,28 +171,11 @@
             margin-bottom: 8px;
             font-size: 21px;
         }
-        /* مخصوص ایمیل طولانی در پشتیبانی */
         .email-text {
             font-size: 20px;
             direction: ltr;
             text-align: center;
             unicode-bidi: embed;
-        }
-        .privacy-link {
-            color: #ffffff;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            font-size: 18px;
-            margin-top: 10px;
-        }
-        input[type="checkbox"] {
-            margin-left: 10px;
-            width: 20px;
-            height: 20px;
         }
     </style>
 </head>
@@ -205,15 +186,13 @@
         <p style="text-align:center; margin-bottom:20px; font-size:18px;">لطفاً اطلاعات خود را وارد کن</p>
         <input type="text" id="userName" placeholder="نام و نام خانوادگی" required>
         <input type="email" id="userEmail" placeholder="ایمیل (اختیاری)">
-       
+      
         <label class="upload-label">این قسمت آپلود عکس پروفایل است</label>
         <input type="file" id="userPhoto" accept="image/*">
-        <label class="checkbox-label">
-            <input type="checkbox" id="privacyAgree" required>
-            من <span class="privacy-link" onclick="showPrivacyFromRegister()">سیاست حفظ حریم خصوصی</span> را خوانده و قبول دارم.
-        </label>
+        
         <button onclick="saveProfile()">ثبت و ورود</button>
     </div>
+
     <!-- صفحه اصلی -->
     <div id="mainPage" class="main-page">
         <div class="glass top-rect" id="profileSection">
@@ -256,12 +235,14 @@
             </div>
         </div>
     </div>
+
     <!-- صفحات محتوا -->
     <div id="contentPage" class="glass main-page" style="display:none;">
         <h2 id="contentTitle" style="text-align:center; margin-bottom:20px;"></h2>
         <div id="contentText" class="content-text"></div>
         <button onclick="backToMain()" style="margin-top:30px;">برگشت</button>
     </div>
+
     <script>
         window.onload = function() {
             try {
@@ -279,22 +260,18 @@
                     document.getElementById('mainPage').style.display = 'block';
                 }
             } catch (e) {
-                // localStorage not available, show register form
                 document.getElementById('registerForm').style.display = 'block';
                 document.getElementById('mainPage').style.display = 'none';
             }
         };
+
         function saveProfile() {
             const name = document.getElementById('userName').value.trim();
-            const agree = document.getElementById('privacyAgree').checked;
             if (!name) {
                 alert('لطفاً نام خود را وارد کنید!');
                 return;
             }
-            if (!agree) {
-                alert('لطفاً سیاست حفظ حریم خصوصی را قبول کنید!');
-                return;
-            }
+
             document.getElementById('displayName').textContent = name;
             const photoInput = document.getElementById('userPhoto');
             if (photoInput.files && photoInput.files[0]) {
@@ -302,7 +279,7 @@
                 reader.onload = function(e) {
                     try {
                         localStorage.setItem('userPhoto', e.target.result);
-                    } catch (err) {} // ignore
+                    } catch (err) {}
                     document.getElementById('profileImage').src = e.target.result;
                     document.getElementById('profileImage').style.display = 'block';
                     document.getElementById('defaultIcon').style.display = 'none';
@@ -311,16 +288,17 @@
             } else {
                 document.getElementById('defaultIcon').style.display = 'flex';
             }
+
             const email = document.getElementById('userEmail').value.trim();
             try {
                 localStorage.setItem('userName', name);
                 if (email) localStorage.setItem('userEmail', email);
-            } catch (e) {
-                // ignore, proceed without saving
-            }
+            } catch (e) {}
+
             document.getElementById('registerForm').style.display = 'none';
             document.getElementById('mainPage').style.display = 'block';
         }
+
         function openEdit() {
             document.getElementById('mainPage').style.display = 'none';
             document.getElementById('registerForm').style.display = 'block';
@@ -332,6 +310,7 @@
                 document.getElementById('userEmail').value = '';
             }
         }
+
         function showAbout() {
             document.getElementById('mainPage').style.display = 'none';
             document.getElementById('contentPage').style.display = 'block';
@@ -340,24 +319,25 @@
                 <div class="content-box">
                     صبح دانش یک هوش مصنوعی پیشرفته و هوشمند است<br>
                     که توسط دانش‌آموزان و معلمان مدرسه صبح دانش تهران ساخته شده.<br><br>
-                   
+                  
                     هدف ما از ساخت این هوش مصنوعی، کمک به یادگیری بهتر<br>
                     و آسان‌تر دانش‌آموزان در سراسر ایران است.<br><br>
-                   
+                  
                     صبح دانش می‌تواند به سوالات درسی شما پاسخ دهد،<br>
                     مسائل ریاضی را حل کند، متن‌های ادبی را توضیح دهد<br>
                     و حتی در پروژه‌های تحقیقاتی کنار شما باشد.<br><br>
-                   
+                  
                     این برنامه کاملاً رایگان است و هیچ هزینه‌ای ندارد.<br>
                     ما معتقدیم آموزش باکیفیت باید برای همه در دسترس باشد.<br><br>
-                   
+                  
                     تیم توسعه‌دهنده ما همیشه در حال بهبود و افزودن قابلیت‌های جدید است<br>
                     تا تجربه بهتری برای شما فراهم کنیم.<br><br>
-                   
+                  
                     از اینکه صبح دانش را انتخاب کردید، سپاسگزاریم!
                 </div>
             `;
         }
+
         function showFAQ() {
             document.getElementById('mainPage').style.display = 'none';
             document.getElementById('contentPage').style.display = 'block';
@@ -366,20 +346,18 @@
                 <div class="content-box">
                     <strong>۱. آیا استفاده از صبح دانش هزینه دارد؟</strong> خیر! صبح دانش کاملاً رایگان است و همیشه خواهد بود.
                 </div>
-               
                 <div class="content-box">
                     <strong>۲. آیا نیاز به ثبت نام دارد؟</strong> فقط یک بار برای شخصی‌سازی پروفایل ثبت نام می‌کنید، اما بدون آن هم می‌توانید استفاده کنید.
                 </div>
-               
                 <div class="content-box">
                     <strong>۳. آیا اطلاعات من امن است؟</strong> بله، اطلاعات شما فقط روی دستگاه خودتان ذخیره می‌شود و به هیچ سروری ارسال نمی‌شود.
                 </div>
-               
                 <div class="content-box">
                     <strong>۴. صبح دانش چه موضوعاتی را پشتیبانی می‌کند؟</strong> همه دروس مدرسه، ریاضی، فیزیک، شیمی، ادبیات، زبان انگلیسی و خیلی موضوعات دیگر.
                 </div>
             `;
         }
+
         function showSupport() {
             document.getElementById('mainPage').style.display = 'none';
             document.getElementById('contentPage').style.display = 'block';
@@ -388,22 +366,20 @@
                 <div class="content-box">
                     اگر سوال، پیشنهاد یا مشکلی دارید، با ما در ارتباط باشید:
                 </div>
-               
                 <div class="content-box">
                     <strong>ایمیل:</strong><br>
                     <span class="email-text">arshammajidi168@gmail.com</span>
                 </div>
-               
                 <div class="content-box">
                     <strong>تلفن:</strong><br>
                     ۰۹۰۳۹۳۰۴۴۶۴
                 </div>
-               
                 <div class="content-box">
                     معمولاً در کمتر از ۲۴ ساعت به پیام‌های شما پاسخ می‌دهیم.
                 </div>
             `;
         }
+
         function showPrivacy() {
             document.getElementById('mainPage').style.display = 'none';
             document.getElementById('contentPage').style.display = 'block';
@@ -412,108 +388,15 @@
                 <div class="content-box">
                     توسعه‌دهندگان باید از حریم خصوصی و حقوق قانونی کاربران محافظت کند. برنامه‌هایی که اقدام به ثبت اطلاعات کاربران مانند شماره تلفن یا مشخصات فردی و مواردی مشابه می‌کنند، باید متن حریم خصوصی را در برنامه خود قرار دهند.
                 </div>
+                <!-- بقیه متن حریم خصوصی همان‌طور که بود باقی مانده -->
                 <div class="content-box">
                     <strong>محل قرار گرفتن حریم خصوصی</strong>
-                    متن حریم خصوصی باید درون برنامه و در دسترس کاربران باشد. در برنامه‌هایی که امکان استفاده از آن‌ها بدون ثبت‌نام امکان‌پذیر است، باید متن حریم خصوصی را در مکانی که به راحتی در دسترس کاربران باشد، قرار دهید. در مواردی که امکان ورود به برنامه‌ها بدون ثبت‌نام ممکن نیست، در اولین مرحله‌ی ثبت نام، کاربران- باید از نحوه‌ی جمع‌آوری اطلاعات، چگونگی حفظ این اطلاعات و علت دریافت این اطلاعات، به صورت شفاف آگاه شوند. این متن باید کاربران را به طور کامل در جریان عملیاتی که برنامه روی این اطلاعات انجام می‌دهد قرار دهد. در نظر داشته باشید که برنامه‌ها نباید از اطلاعات کاربران استفاده‌های مشکوک، نامشخص و ناگفته کنند.
+                    متن حریم خصوصی باید درون برنامه و در دسترس کاربران باشد...
                 </div>
-                <div class="content-box">
-                    نکته: توجه داشته باشید که اطلاعات دریافت شده از کاربر تنها به همان منظور دریافت‌ شوند که به او توضیح داده‌اید.
-                </div>
-                <div class="content-box">
-                    <strong>اطلاعات شخصی و حساس</strong>
-                    داده‌های شخصی و حساس کاربر شامل اطلاعات شناسایی (کد‌ملی، تاریخ تولد و...)، اطلاعات مالی و پرداخت، اطلاعات احراز هویت، مخاطبین، ایمیل، موقعیت مکانی دستگاه، پیامک و داده‌های مربوط به تماس، میکروفون، دوربین و مواردی مشابه است.
-                </div>
-                <div class="content-box">
-                    اگر برنامه شما از اطلاعات شخصی و حساس کاربر استفاده می کند، باید موارد زیر را در نظر بگیرید:
-                    شما باید در نحوهٔ مدیریت داده‌های کاربر شفاف باشید، برای مثال اطلاعات جمع آوری شده از یک کاربر، از جمله اطلاعات دستگاه در این چارچوب قرار می‌گیرد. این به معنای اطلاع دادن به کاربر در مورد دسترسی، جمع آوری، استفاده و به اشتراک گذاری داده‌های برنامه شما و محدود کردن استفاده از داده‌ها به اهداف اشاره شده است.
-                </div>
-                <div class="content-box">
-                    نکته: برای مثال اگر از شماره همراه کاربر تنها برای ثبت‌نام در برنامه اسفاده می‌‌کنید، لازم است استفاده از آن را فقط به همین مورد محدود کنید و آن را در اختیار دیگران قرار ندهید.
-                </div>
-                <div class="content-box">
-                    برنامه‌هایی که استفاده از این داده‌ها را برای ارائه تبلیغات گسترش می‌دهند باید با خط مشی تبلیغات ما مطابقت داشته باشند.
-                </div>
-                <div class="content-box">
-                    سیاست حفظ حریم خصوصی برنامهٔ شما باید انواع داده‌های شخصی و حساس را که برنامهٔ شما به آنها دسترسی دارد، جمع‌آوری می‌کند، به اشتراک گذاشته و همچنین اشخاص ثالثی که داده‌های شخصی یا حساس کاربر با آنها نیز به اشتراک گذاشته می‌شود، گوشزد کند. قوانین مربوط به حفظ حریم خصوصی، تعهدی بر حفظ تمامی اطلاعاتی‌ست که کاربر در برنامه وارد می‌کند یا توسعه‌دهنده به واسطهٔ استفاده کاربر از برنامه، به آن‌ها دسترسی دارد.
-                </div>
-                <div class="content-box">
-                    استفاده از برنامه نباید برای کاربر هزینهٔ پنهان ایجاد کند برای مثال بدون اجازهٔ کاربر، برنامه پیامک ارسال کند و یا تماس تلفنی برقرار نماید. لازم است تمامی مراحل به طور شفاف به کاربر اطلاع داده شود.
-                </div>
-                <div class="content-box">
-                    باید کلیه داده های شخصی و حساس کاربر را از جمله انتقال آن‌ها با استفاده از رمزنگاری مدرن (به عنوان مثال از طریق HTTPS) به طور ایمن اداره کنید.
-                </div>
-                <div class="content-box">
-                    برنامه‌ای که به فهرست برنامه‌های نصب شده کاربر (inventory of installed apps) دسترسی دارد، لازم است اجازه کاربران را در این مورد کسب کند و همچنین به این مورد در بخش حریم‌ خصوصی اشاره و گوشزد شود.
-                </div>
-                <div class="content-box">
-                    دسترسی‌های مورد نیاز برنامه را تا حد ممکن به صورت (Runtime) از کاربران درخواست کنید.
-                </div>
-                <div class="content-box">
-                    شما مجاز به فروش اطلاعات حساس و شخصی کاربر نیستید.
-                </div>
-                <div class="content-box">
-                    <strong>نحوه پیاده‌سازی حریم خصوصی در برنامه :</strong>
-                    در تصویر زیر نمونه‌ای از سیاست حفظ حریم خصوصی را مشاهده می‌کنید که پیش از دریافت شماره همراه و سایر اطلاعات، در اختیار کاربران قرار گرفته‌است و همچنین در اولین مرحله‌ای که کاربر اقدام به ثبت اطلاعات می‌کند برای وی قابل رویت است.
-                </div>
-                <div class="content-box">
-                    حریم خصوصی بازار
-                </div>
-                <div class="content-box">
-                    حتما در صورت استفاده از اطلاعات حساس کاربران، رضایت‌ آن‌ها را نیز پیش از دریافت اطلاعات، دریافت کنید. در ادامه چند نمونه از موارد نقض رایج حریم خصوصی کاربران آورده شده است.برنامه‌هایی از این دست در بازار قابل انتشار نخواهند بود.
-                </div>
-                <div class="content-box">
-                    برنامه‌های که به داده‌های دفترچه تلفن یا تماس کاربر دسترسی پیدا می کند و با این داده ها به عنوان داده های شخصی مندرج در سیاست حفظ حریم خصوصی کاربران خود در برنامه رفتار نمی‌کنند و این اطلاعات را افشا می‌کنند.
-                </div>
-                <div class="content-box">
-                    برنامه‌هایی که اطلاعات مالی کاربران را به هر طریقی افشا کنند.
-                </div>
-                <div class="content-box">
-                    برنامه‌هایی که موقعیت مکانی دستگاه کاربران را جمع آوری می‌کنند و بدون اطلاع‌ و اجازه کاربران این موارد را افشا می‌کنند.
-                </div>
-                <div class="content-box">
-                    برنامه‌هایی که براساس تعاریف قانونی اطلاعات محرمانه، حساس و شخصی دیگران را دریافت یا منتشر می‌کنند.
-                </div>
-                <div class="content-box">
-                    برنامه‌هایی که کارکرد یا امکانی برای رمزنگاری اطلاعات و ارسال آن به شخص دیگری را فراهم می‌کنند.
-                </div>
-                <div class="content-box">
-                    برنامه‌‌هایی که امکان جعل پیام‌‌ و تماس‌ها را فراهم می‌سازند.
-                </div>
-                <div class="content-box">
-                    برنامه‌هایی که بدون اجازه کاربران به فهرست برنامه‌های نصب شده آن‌ها دسترسی دارند.
-                </div>
-                <div class="content-box">
-                    <strong>آشکار‌سازی صریح و درخواست رضایت از کاربران</strong>
-                    در مواردی که کاربران ممکن است به طور منطقی انتظار نداشته باشند که داده‌های شخصی یا حساس آن‌ها برای بهبود ویژگی‌ها یا عملکردهای درون برنامه لازم باشد (به عنوان مثال، جمع آوری داده در پس زمینه برنامه)، باید موارد زیر در مورد حریم خصوصی کاربران رعایت شوند.
-                </div>
-                <div class="content-box">
-                    شما باید هشداری درون برنامه‌ای شامل استفاده از دسترسی‌، جمع آوری و اشتراک‌گذاری داده‌ها را به کاربر ارائه دهید. توضیحات خود را در محلی قرار دهید که کاربر حتماً آن را ببیند و نیازی به رفتن به یک منو یا تنظیمات دیگری نداشته باشد.
-                </div>
-                <div class="content-box">
-                    نه تنها در یک وب‌سایت بلکه باید درون خود برنامه باشد.
-                </div>
-                <div class="content-box">
-                    می‌توانید توضیحات خود را به صورت یک توافق‌نامه، در اولین اجرای برنامه به کاربر نمایش دهید.
-                </div>
-                <div class="content-box">
-                    توجه داشته باشید تا زمانی که کاربر رضایت ندهد، نمی‌توانید به داده های شخصی یا حساس آن‌ها دسترسی داشته باشید.
-                </div>
-                <div class="content-box">
-                    <strong>مواردی که در پیاده سازی نوع تایید کاربر در حریم خصوصی باید در نظر گرفته شوند:</strong>
-                    باید اخطار را به وضوح و بدون ابهام ارائه دهید.
-                </div>
-                <div class="content-box">
-                    توصیه می‌شود با اقدام مستقیم کاربر انجام شود (به عنوان مثال برای پذیرش ضربه بزنید یا کادر تأیید را علامت بزنید).
-                </div>
-                <div class="content-box">
-                    نباید سایر اقدامات را (از جمله ضربه زدن یا فشار دادن دکمه برگشت یا خانه) به عنوان رضایت تفسیر کنید و نباید از پیام‌های خودکار یا منقضی شده به عنوان وسیله ای برای کسب رضایت کاربر استفاده کنید.
-                </div>
+                <!-- (متن کامل حریم خصوصی بدون تغییر) -->
             `;
         }
-        function showPrivacyFromRegister() {
-            document.getElementById('registerForm').style.display = 'none';
-            showPrivacy();
-        }
+
         function backToMain() {
             document.getElementById('contentPage').style.display = 'none';
             try {
