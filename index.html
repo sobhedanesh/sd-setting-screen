@@ -177,6 +177,22 @@
             text-align: center;
             unicode-bidi: embed;
         }
+        /* استایل برای بخش انگلیسی در صفحه راست‌چین */
+        .english-section {
+            direction: ltr;
+            text-align: left;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 15px;
+        }
+        .english-section .content-box {
+            direction: ltr;
+            text-align: left;
+        }
+        .english-section strong {
+            font-family: 'Lalezar', cursive; /* برای هماهنگی ظاهری */
+        }
     </style>
 </head>
 <body>
@@ -319,20 +335,20 @@
                 <div class="content-box">
                     صبح دانش یک هوش مصنوعی پیشرفته و هوشمند است<br>
                     که توسط دانش‌آموزان و معلمان مدرسه صبح دانش تهران ساخته شده.<br><br>
-                  
+                    
                     هدف ما از ساخت این هوش مصنوعی، کمک به یادگیری بهتر<br>
                     و آسان‌تر دانش‌آموزان در سراسر ایران است.<br><br>
-                  
+                    
                     صبح دانش می‌تواند به سوالات درسی شما پاسخ دهد،<br>
                     مسائل ریاضی را حل کند، متن‌های ادبی را توضیح دهد<br>
                     و حتی در پروژه‌های تحقیقاتی کنار شما باشد.<br><br>
-                  
+                    
                     این برنامه کاملاً رایگان است و هیچ هزینه‌ای ندارد.<br>
                     ما معتقدیم آموزش باکیفیت باید برای همه در دسترس باشد.<br><br>
-                  
+                    
                     تیم توسعه‌دهنده ما همیشه در حال بهبود و افزودن قابلیت‌های جدید است<br>
                     تا تجربه بهتری برای شما فراهم کنیم.<br><br>
-                  
+                    
                     از اینکه صبح دانش را انتخاب کردید، سپاسگزاریم!
                 </div>
             `;
@@ -383,18 +399,89 @@
         function showPrivacy() {
             document.getElementById('mainPage').style.display = 'none';
             document.getElementById('contentPage').style.display = 'block';
-            document.getElementById('contentTitle').textContent = 'حفظ حریم‌خصوصی';
-            document.getElementById('contentText').innerHTML = `
+            document.getElementById('contentTitle').textContent = 'حریم خصوصی و امنیت';
+            
+            // متن جدید حریم خصوصی (فارسی + انگلیسی)
+            const privacyText = `
                 <div class="content-box">
-                    توسعه‌دهندگان باید از حریم خصوصی و حقوق قانونی کاربران محافظت کند. برنامه‌هایی که اقدام به ثبت اطلاعات کاربران مانند شماره تلفن یا مشخصات فردی و مواردی مشابه می‌کنند، باید متن حریم خصوصی را در برنامه خود قرار دهند.
+                    <strong>حریم خصوصی و امنیت در اپلیکیشن هوش مصنوعی صبح دانش</strong><br><br>
+                    حریم خصوصی کاربران برای ما اولویت اول است. این متن به زبان ساده توضیح می‌دهد که چه اطلاعاتی جمع‌آوری می‌شود، چرا و چگونه از آن محافظت می‌کنیم.
+                    <br><br>
+                    <strong>۱. چه اطلاعاتی جمع‌آوری می‌شود؟</strong><br>
+                    - اطلاعاتی که شما مستقیماً ارائه می‌دهید (مانند نام، ایمیل، شماره تلفن).<br>
+                    - اطلاعات استفاده از اپلیکیشن (مانند مکالمات با هوش مصنوعی، صفحات بازدید شده).<br>
+                    - اطلاعات فنی دستگاه (مدل گوشی، سیستمعامل، شناسه منحصربه‌فرد دستگاه).
+                    <br><br>
+                    <strong>۲. چرا این اطلاعات را جمع‌آوری می‌کنیم؟</strong><br>
+                    - برای ارائه و بهبود پاسخ‌های هوش مصنوعی.<br>
+                    - برای پشتیبانی و ارتباط با شما.<br>
+                    - برای افزایش امنیت و جلوگیری از سوءاستفاده.
+                    <br><br>
+                    <strong>۳. امنیت اطلاعات</strong><br>
+                    تمام داده‌ها با پروتکل رمزنگاری شده (مانند TLS) منتقل می‌شوند. سرورهای ما دارای حفاظت فیزیکی و نرم‌افزاری هستند. دسترسی به اطلاعات فقط برای افراد مجاز و تحت قوانین سختگیرانه است.
+                    <br><br>
+                    <strong>۴. اشتراک‌گذاری با شخص ثالث</strong><br>
+                    اطلاعات شخصی شما را بدون رضایت شما نمی‌فروشیم یا به اشتراک نمی‌گذاریم، مگر در موارد قانونی (مثلاً حکم دادگاه) یا برای عملکرد سرویس (مانند میزبانی سرور).
+                    <br><br>
+                    <strong>۵. نگهداری و حذف داده‌ها</strong><br>
+                    اطلاعات تا زمانی که حساب کاربری دارید یا برای اهداف قانونی نیاز باشد، نگهداری می‌شود. شما می‌توانید درخواست حذف حساب و اطلاعات خود را ارسال کنید.
+                    <br><br>
+                    <strong>۶. حقوق شما</strong><br>
+                    شما حق دارید:<br>
+                    - از نوع داده‌های ذخیره‌شده مطلع شوید.<br>
+                    - خروج از بازاریابی ایمیلی را درخواست کنید.<br>
+                    - درخواست تصحیح یا حذف اطلاعات خود را بدهید.
+                    <br><br>
+                    <strong>۷. تغییرات در این متن</strong><br>
+                    در صورت تغییر قابل توجه، از طریق ایمیل یا داخل اپلیکیشن به شما اطلاع خواهیم داد.
+                    <br><br>
+                    <strong>تماس با ما</strong><br>
+                    آدرس ایمیل پشتیبانی: arshammajidi168@gmail.com
                 </div>
-                <!-- بقیه متن حریم خصوصی همان‌طور که بود باقی مانده -->
-                <div class="content-box">
-                    <strong>محل قرار گرفتن حریم خصوصی</strong>
-                    متن حریم خصوصی باید درون برنامه و در دسترس کاربران باشد...
+                
+                <div class="english-section">
+                    <div class="content-box">
+                        <strong>Privacy & Security Policy for Sobhedanesh AI</strong><br><br>
+                        User privacy is our top priority. This policy explains what data we collect, why we collect it, and how we protect it.
+                        <br><br>
+                        <strong>1. What Data We Collect</strong><br>
+                        - Information you provide directly (e.g., name, email, phone number).<br>
+                        - Usage data (e.g., conversations with AI, pages visited).<br>
+                        - Device information (model, OS version, unique device ID).
+                        <br><br>
+                        <strong>2. Why We Collect Data</strong><br>
+                        - To operate and improve AI responses.<br>
+                        - To provide customer support and respond to inquiries.<br>
+                        - To enhance security, prevent fraud, and enforce terms of service.
+                        <br><br>
+                        <strong>3. Data Security</strong><br>
+                        All data is transmitted over encrypted protocols (TLS). Our servers have physical and software protection. Access is restricted to authorized personnel under strict policies.
+                        <br><br>
+                        <strong>4. Third-Party Sharing</strong><br>
+                        We never sell your personal data. We may share it only:<br>
+                        - With your explicit consent.<br>
+                        - For legal reasons (e.g., court order).<br>
+                        - With trusted service providers (e.g., cloud hosting) who follow strict confidentiality.
+                        <br><br>
+                        <strong>5. Data Retention & Deletion</strong><br>
+                        We keep your data as long as you have an active account or as required by law. You can request account and data deletion anytime.
+                        <br><br>
+                        <strong>6. Your Rights</strong><br>
+                        You have the right to:<br>
+                        - Know what data we store about you.<br>
+                        - Opt out of email marketing.<br>
+                        - Request correction or deletion of your data.
+                        <br><br>
+                        <strong>7. Changes to This Policy</strong><br>
+                        We will notify you of significant changes via email or in-app message.
+                        <br><br>
+                        <strong>Contact Us</strong><br>
+                        Email: arshammajidi168@gmail.com
+                    </div>
                 </div>
-                <!-- (متن کامل حریم خصوصی بدون تغییر) -->
             `;
+            
+            document.getElementById('contentText').innerHTML = privacyText;
         }
 
         function backToMain() {
