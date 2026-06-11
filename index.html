@@ -193,6 +193,12 @@
         .english-section strong {
             font-family: 'Lalezar', cursive; /* برای هماهنگی ظاهری */
         }
+        
+        /* اضافه کردن 100px ارتفاع به انتهای صفحات اصلی */
+        .bottom-spacer {
+            height: 100px;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -207,6 +213,7 @@
         <input type="file" id="userPhoto" accept="image/*">
         
         <button onclick="saveProfile()">ثبت و ورود</button>
+        <div class="bottom-spacer"></div> <!-- اسپیسر 100 پیکسلی -->
     </div>
 
     <!-- صفحه اصلی -->
@@ -250,6 +257,7 @@
                 <div class="option-text">حفظ حریم‌خصوصی</div>
             </div>
         </div>
+        <div class="bottom-spacer"></div> <!-- اسپیسر 100 پیکسلی -->
     </div>
 
     <!-- صفحات محتوا -->
@@ -257,6 +265,7 @@
         <h2 id="contentTitle" style="text-align:center; margin-bottom:20px;"></h2>
         <div id="contentText" class="content-text"></div>
         <button onclick="backToMain()" style="margin-top:30px;">برگشت</button>
+        <div class="bottom-spacer"></div> <!-- اسپیسر 100 پیکسلی -->
     </div>
 
     <script>
